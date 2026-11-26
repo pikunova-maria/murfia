@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body, #root { height: 100%; }
+  body {
+    @apply bg-cream text-ink font-sans antialiased;
+    transition: background-color 1s ease, color 1s ease;
+    /* лапки-курсоры */
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><text y='24' font-size='22'>🐾</text></svg>") 6 6, auto;
+  }
+  body {
+    background-image:
+      radial-gradient(1100px 520px at 50% -8%, rgba(255, 214, 160, 0.75), transparent 65%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='150'><text x='18' y='62' font-size='30' opacity='.08' transform='rotate(-18 40 50)'>🐾</text><text x='92' y='128' font-size='24' opacity='.06' transform='rotate(14 100 118)'>🐾</text></svg>");
+    background-attachment: fixed;
+  }
+  body.night {
+    @apply bg-night-950 text-cream;
+    background-image: radial-gradient(900px 520px at 82% -8%, rgba(43, 68, 136, 0.85), transparent 65%),
+                      radial-gradient(700px 420px at 8% 108%, rgba(60, 40, 110, 0.55), transparent 70%);
+  }
+  h1, h2, h3 { @apply font-display tracking-wide; }
+  h1 { @apply uppercase; }
+  button, [role='button'], a, select, label {
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><text y='24' font-size='24'>🐱</text></svg>") 8 8, pointer;
+  }
+  ::selection { background: #F4A261; color: #2A2118; }
+}
+
+@layer components {
+  /* «Карточка» как в колоде: золотая рамка и тонкий внутренний кант */
+  .card {
+    @apply relative rounded-3xl bg-gradient-to-b from-white/85 to-cream-200/75 p-4 shadow-card ring-1 ring-gold/60 backdrop-blur
+           dark:from-night-800/85 dark:to-night-900/85 dark:ring-gold/35 dark:shadow-none;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 5px;
+    border-radius: 1.15rem;
+    border: 1px solid rgba(201, 164, 92, 0.35);
+    pointer-events: none;
+  }
+  /* Золотой заголовок для названия игры */
+  .hero-title {
+    @apply bg-gradient-to-b from-gold-light via-gold to-gold-dark bg-clip-text text-transparent;
+    filter: drop-shadow(0 3px 0 rgba(42, 33, 24, 0.35));
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl px-4 py-2.5 font-extrabold
+           transition active:translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply btn bg-gradient-to-b from-[#F8BC86] to-paw text-ink shadow-soft ring-1 ring-gold-dark/40
+           hover:brightness-105 dark:shadow-none;
+  }
+  .btn-ghost {
+    @apply btn bg-ink/5 text-ink hover:bg-ink/10 dark:bg-white/10 dark:text-cream dark:hover:bg-white/20;
+  }
+  .btn-danger {
+    @apply btn bg-red-500 text-white hover:bg-red-600;
+  }
+  .input {
+    @apply w-full rounded-2xl border-2 border-ink/10 bg-white/80 px-4 py-2.5 font-bold text-ink
+           outline-none transition focus:border-paw
+           dark:border-white/15 dark:bg-night-900/80 dark:text-cream dark:focus:border-moon;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full bg-ink/10 px-2.5 py-0.5 text-xs font-extrabold
+           dark:bg-white/15;
+  }
+}
+
+/* Красивые тонкие скроллбары */
+* { scrollbar-width: thin; scrollbar-color: rgba(244,162,97,.6) transparent; }
